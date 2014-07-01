@@ -3,6 +3,3 @@ dist
 .tmp
 .sass-cache
 bower_components
-package.json
-Gruntfile.js
-bower.json
