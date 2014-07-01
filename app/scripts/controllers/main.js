@@ -77,7 +77,8 @@ uiMixer.controller('colorSchemeController', function($scope){
             }
         }
         for (var i = 0; i < $scope.colorScheme.length; i++) {
-            //get RGB for each hex in the Object Arrat
+            //get RGB for each hex in the Object Array
+            var result = '';
             var textR = hexToR($scope.colorScheme[i].fgHex);
             var backR = hexToR($scope.colorScheme[i].bgHex);
             var textG = hexToG($scope.colorScheme[i].fgHex);
@@ -87,10 +88,10 @@ uiMixer.controller('colorSchemeController', function($scope){
             //start the calculation
             //if bg > text
             if((textR+textG+textB) > (backR + backG + backB)){
-                var result = (calculate(textR, textG, textB) + 0.05) / (calculate(backR, backG, backB) + 0.05);
+                result = (calculate(textR, textG, textB) + 0.05) / (calculate(backR, backG, backB) + 0.05);
             }
             else{
-                var result = (calculate(backR, backG, backB) + 0.05) / (calculate(textR, textG, textB) + 0.05);
+                result = (calculate(backR, backG, backB) + 0.05) / (calculate(textR, textG, textB) + 0.05);
             }
             //if text >bg
 
