@@ -1,0 +1,159 @@
+<!doctype html>
+<html ng-app="uiMixer">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <h1></h1>
+    <section id="colorscheme">
+        <h3>Colors</h3>
+        <table class="palette">
+            <caption>Palette I</caption>
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Color</th>
+                <th>Hex</th>
+            </tr>
+            </thead>
+            <tbody ng-controller="paletteAController">
+            <tr ng-repeat="color in paletteA">
+                <td>{{ color.title }}</td>
+                <td><div class="swatch" style="background-color:{{color.hex}}"></div></td>
+                <td><input type="text" ng-model="color.hex" value="{{color.hex}}" class="hex"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table class="palette">
+            <caption>Palette II</caption>
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Color</th>
+                <th>Hex</th>
+            </tr>
+            </thead>
+            <tbody ng-controller="paletteBController">
+            <tr ng-repeat="color in paletteB">
+                <td>{{ color.title }}</td>
+                <td><div class="swatch" style="background-color:{{color.hex}}"></div></td>
+                <td><input type="text" ng-model="color.hex" value="{{color.hex}}" class="hex"></td>
+            </tr>
+            </tbody>
+        </table>
+
+
+        <table class="palette">
+            <caption>Palette III</caption>
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Color</th>
+                <th>Hex</th>
+            </tr>
+            </thead>
+            <tbody ng-controller="paletteCController">
+            <tr ng-repeat="color in paletteC">
+                <td>{{ color.title }}</td>
+                <td><div class="swatch" style="background-color:{{color.hex}}"></div></td>
+                <td><input type="text" ng-model="color.hex" value="{{color.hex}}" class="hex"></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+
+        <table class="palette">
+            <caption>Design Spec</caption>
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Sample</th>
+                <th>Text</th>
+                <th>Background</th>
+                <th>Ratio</th>
+                <th>AA</th>
+                <th>AAA</th>
+            </tr>
+            </thead>
+            <tbody ng-controller="colorSchemeController">
+                <tr ng-repeat="color in colorScheme">
+                    <td>{{ color.title }}</td>
+                    <td>
+                        <div class="swatchtext" style="background-color:{{color.bgHex}}; color:{{color.fgHex}}">Lorem ipsum</div>
+                    </td>
+                    <td>
+                        <input type="text" ng-change="ratioCalc(color)" ng-model="color.fgHex" value="{{color.fgHex}}" class="hex">
+                        <input type="color" ng-change="ratioCalc(color)" ng-model="color.fgHex" value="{{color.fgHex}}" class="hex">
+                    </td>
+                    <td>
+                        <input type="text" ng-change="ratioCalc(color)" ng-model="color.bgHex" value="{{color.bgHex}}" class="hex">
+                        <input type="color" ng-change="ratioCalc(color)" ng-model="color.bgHex" value="{{color.bgHex}}" class="hex">
+                    </td>
+                    <td>
+                        <input type="text" class="hex" value="{{ratio[$index]}}" readonly>
+                    </td>
+                    <td>
+                        <div class="pass normal" ng-if="ratio[$index] > 4.5">Pass</div>
+                        <div class="fail normal" ng-if="ratio[$index] < 4.5">Fail</div>
+                        <div class="pass large" ng-if="ratio[$index] > 3">Pass</div>
+                        <div class="fail large" ng-if="ratio[$index] < 3">Fail</div>
+                    </td>
+                    <td>
+                        <div class="pass normal" ng-if="ratio[$index] > 7">Pass</div>
+                        <div class="fail normal" ng-if="ratio[$index] < 7">Fail</div>
+                        <div class="pass large" ng-if="ratio[$index] > 4.5">Pass</div>
+                        <div class="fail large" ng-if="ratio[$index] < 4.5">Fail</div>
+                    </td>
+                    <td class="desc">
+                        Normal Text<br/>
+                        Bold Text
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </section>
+
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/json3/lib/json3.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/about.js"></script>
+        <!-- endbuild -->
+</body>
+</html>
